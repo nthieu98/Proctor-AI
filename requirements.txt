@@ -7,3 +7,5 @@ pyaudio
 numpy
 sklearn==0.19.1
 wget
+dlib
+face-recognition
