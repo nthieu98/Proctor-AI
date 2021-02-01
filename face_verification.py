@@ -54,11 +54,13 @@ def get_frame(img):
 def verify_two_image(img1, img2):
     # params: 2 images
     # return: True if 2 images match
-    
-    frame1 = get_frame(img1)
-    frame2 = get_frame(img2)
-    face1_encoding = fr.face_encodings(frame1)[0]
-    face2_encoding = fr.face_encodings(frame2)[0]
-    results = fr.compare_faces([face1_encoding], face2_encoding)
+    try:
+        frame1 = get_frame(img1)
+        frame2 = get_frame(img2)
+        face1_encoding = fr.face_encodings(frame1)[0]
+        face2_encoding = fr.face_encodings(frame2)[0]
+        results = fr.compare_faces([face1_encoding], face2_encoding)
 
-    return results[0]
+        return results[0]
+    except:
+        return False
