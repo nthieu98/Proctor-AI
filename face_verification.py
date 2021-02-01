@@ -44,3 +44,21 @@ def face_verification_from_image(img, dataset_dir="face_dataset"):
 
         face_names.append(name)
     return face_names
+
+def get_frame(img):
+    image = cv2.imread(img)
+    small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+    rgb_small_frame = small_frame[:, :, ::-1]
+    return rgb_small_frame
+
+def verify_two_image(img1, img2):
+    # params: 2 images
+    # return: True if 2 images match
+    
+    frame1 = get_frame(img1)
+    frame2 = get_frame(img2)
+    face1_encoding = fr.face_encodings(frame1)[0]
+    face2_encoding = fr.face_encodings(frame2)[0]
+    results = fr.compare_faces([face1_encoding], face2_encoding)
+
+    return results[0]
